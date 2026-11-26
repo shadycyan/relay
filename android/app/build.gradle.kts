@@ -18,7 +18,7 @@ val keystoreProperties = Properties().apply {
 
 android {
     namespace = "com.nightcity.msgs"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
