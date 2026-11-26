@@ -61,7 +61,10 @@ class MainActivity : FlutterActivity() {
                         else result.success(SmsStore.threadIdFor(this, address))
                     }
 
-                    "initialAddress" -> result.success(intent.getStringExtra("address"))
+                    "initialAddress" -> result.success(
+                        intent.getStringExtra("address")
+                            ?: intent.data?.schemeSpecificPart?.substringBefore('?')
+                    )
 
                     else -> result.notImplemented()
                 }
