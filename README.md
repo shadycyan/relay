@@ -26,6 +26,27 @@ until then it can read + send, but can't receive/store.
 - group threads show only first address
 - fonts via google_fonts need internet on first launch (bundle Rajdhani under assets/ to go offline)
 
+## builds
+every push to `master` builds `relay.apk` in github actions (`.github/workflows/build-apk.yml`):
+- **permanent link** (no login, open it on the phone):
+  `https://github.com/shadycyan/relay/releases/download/latest/relay.apk`
+- **per-run artifact**: actions tab -> latest run -> artifacts (needs a github login, expires after 90 days)
+- tag a commit (`git tag v1.0.0 && git push --tags`) for a versioned release
+
+every build ships a `SHA256SUMS` file next to the apk; check it with `sha256sum -c SHA256SUMS`.
+
+signing: builds use the throwaway debug key unless you add a real keystore, which
+means a new apk won't install over an older one. to fix that once:
+
+```bash
+keytool -genkeypair -v -keystore relay-release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias relay
+base64 -w0 relay-release.jks        # paste into the ANDROID_KEYSTORE_BASE64 secret
+```
+
+then add these repo secrets (settings -> secrets and variables -> actions):
+`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` (`relay`), `ANDROID_KEY_PASSWORD`.
+keep `relay-release.jks` backed up — losing it means users must uninstall to upgrade.
+
 ## telegram plan
 add a `Channel` interface (threads(), messages(), send(), events) with SmsChannel (current bridge) and TgChannel (tdlib).
 ui only talks to Channel, merges threads sorted by date, HudTag shows SMS/TG.
