@@ -19,7 +19,7 @@ class MainActivity : FlutterActivity() {
                     "isDefault" -> result.success(SmsStore.isDefault(this))
 
                     "requestDefault" -> {
-                        startActivity(Intent(Settings.ACTION_DEFAULT_SMS_PACKAGE_SETTINGS))
+                        startActivity(Intent(Settings.ACTION_DEFAULT_APPS_SETTINGS))
                         result.success(true)
                     }
 
