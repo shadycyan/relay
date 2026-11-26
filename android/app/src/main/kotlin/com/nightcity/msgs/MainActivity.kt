@@ -1,9 +1,9 @@
 package com.nightcity.msgs
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
@@ -19,7 +19,11 @@ class MainActivity : FlutterActivity() {
                     "isDefault" -> result.success(SmsStore.isDefault(this))
 
                     "requestDefault" -> {
-                        startActivity(Intent(Settings.ACTION_DEFAULT_APPS_SETTINGS))
+                        try {
+                            startActivity(Intent("android.settings.DEFAULT_APPS_SETTINGS"))
+                        } catch (_: ActivityNotFoundException) {
+                            startActivity(Intent(Intent.ACTION_SETTINGS))
+                        }
                         result.success(true)
                     }
 
