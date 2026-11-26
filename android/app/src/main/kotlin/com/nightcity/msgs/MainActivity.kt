@@ -22,7 +22,7 @@ class MainActivity : FlutterActivity() {
                         try {
                             startActivity(Intent("android.settings.DEFAULT_APPS_SETTINGS"))
                         } catch (_: ActivityNotFoundException) {
-                            startActivity(Intent(Intent.ACTION_SETTINGS))
+                            startActivity(Intent("android.settings.SETTINGS"))
                         }
                         result.success(true)
                     }
