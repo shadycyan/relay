@@ -29,7 +29,7 @@ object Notifier {
             .setContentTitle(SmsStore.contactName(ctx, address) ?: address)
             .setContentText(body)
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))
-            .setColor(0xFFFCEE09.toInt())
+            .setColor(0xFFED1C24.toInt())
             .setAutoCancel(true)
             .setContentIntent(pi)
             .build()

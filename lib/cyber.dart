@@ -88,7 +88,7 @@ class CyberButton extends StatelessWidget {
   final VoidCallback onTap;
   final Color color;
   const CyberButton(
-      {super.key, required this.label, required this.onTap, this.color = C.yellow});
+      {super.key, required this.label, required this.onTap, this.color = C.red});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -100,7 +100,7 @@ class CyberButton extends StatelessWidget {
           tl: true,
           br: true,
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-          child: Text(label, style: hud(16, color: Colors.black, w: FontWeight.w700, ls: 2)),
+          child: Text(label, style: hud(16, color: C.bg, w: FontWeight.w700, ls: 2)),
         ),
       );
 }
@@ -123,12 +123,12 @@ class Avatar extends StatelessWidget {
         height: size,
         child: CyberPanel(
           fill: C.panel2,
-          border: C.cyan.withValues(alpha: .7),
+          border: C.dim.withValues(alpha: .55),
           cut: 8,
           tl: true,
           br: true,
           padding: EdgeInsets.zero,
-          child: Center(child: Text(_initials, style: hud(size * .38, color: C.cyan))),
+          child: Center(child: Text(_initials, style: hud(size * .38, color: C.accent))),
         ),
       );
 }
@@ -136,7 +136,7 @@ class Avatar extends StatelessWidget {
 class HudTag extends StatelessWidget {
   final String text;
   final Color color;
-  const HudTag(this.text, {super.key, this.color = C.cyan});
+  const HudTag(this.text, {super.key, this.color = C.dim});
   @override
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
@@ -166,7 +166,7 @@ class _BgPainter extends CustomPainter {
           ..shader = RadialGradient(
                   center: Alignment.topLeft,
                   radius: 1.1,
-                  colors: [C.yellow.withValues(alpha: .07), Colors.transparent])
+                  colors: [C.red.withValues(alpha: .06), Colors.transparent])
               .createShader(Offset.zero & s));
     canvas.drawRect(
         Offset.zero & s,
@@ -174,10 +174,10 @@ class _BgPainter extends CustomPainter {
           ..shader = RadialGradient(
                   center: Alignment.bottomRight,
                   radius: 1.0,
-                  colors: [C.cyan.withValues(alpha: .07), Colors.transparent])
+                  colors: [C.text.withValues(alpha: .025), Colors.transparent])
               .createShader(Offset.zero & s));
     final grid = Paint()
-      ..color = C.cyan.withValues(alpha: .035)
+      ..color = C.text.withValues(alpha: .025)
       ..strokeWidth = 1;
     for (double x = 0; x < s.width; x += 40) {
       canvas.drawLine(Offset(x, 0), Offset(x, s.height), grid);

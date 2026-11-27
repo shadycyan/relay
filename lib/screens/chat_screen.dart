@@ -60,7 +60,9 @@ class _ChatScreenState extends State<ChatScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: C.red, content: Text('SEND FAILED // $e', style: hud(14))));
+            backgroundColor: C.red,
+            content: Text('SEND FAILED // $e',
+                style: hud(14, color: C.bg, w: FontWeight.w700))));
       }
     }
     await Future.delayed(const Duration(milliseconds: 200));
@@ -73,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Row(children: [
           IconButton(
               onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.chevron_left, color: C.yellow, size: 30)),
+              icon: const Icon(Icons.chevron_left, color: C.text, size: 30)),
           Avatar(label: title, size: 40),
           const SizedBox(width: 12),
           Expanded(
@@ -81,11 +83,11 @@ class _ChatScreenState extends State<ChatScreen> {
               Text(title.toUpperCase(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: hud(20, color: C.yellow, ls: 2)),
+                  style: hud(20, color: C.text, ls: 2)),
               if (title != widget.address) Text(widget.address, style: hud(13, color: C.dim)),
             ]),
           ),
-          const HudTag('SMS'),
+          const HudTag('SMS', color: C.red),
         ]),
       );
 
@@ -99,14 +101,14 @@ class _ChatScreenState extends State<ChatScreen> {
           constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * .78),
           child: Column(crossAxisAlignment: mine ? CrossAxisAlignment.end : CrossAxisAlignment.start, children: [
             CyberPanel(
-              fill: mine ? C.yellow : C.panel2,
-              border: mine ? null : C.cyan.withValues(alpha: .55),
+              fill: mine ? C.text : C.panel2,
+              border: mine ? null : C.dim.withValues(alpha: .45),
               cut: 10,
               tl: !mine,
               br: mine,
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               child: Text(m.body,
-                  style: hud(17, color: mine ? Colors.black : C.text, w: FontWeight.w500, ls: .3)),
+                  style: hud(17, color: mine ? C.bg : C.text, w: FontWeight.w500, ls: .3)),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 3, left: 4, right: 4),
@@ -125,7 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Expanded(
             child: CyberPanel(
               fill: C.panel,
-              border: C.yellow.withValues(alpha: .6),
+              border: C.dim.withValues(alpha: .45),
               cut: 10,
               tl: true,
               br: false,
@@ -134,7 +136,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 controller: ctl,
                 minLines: 1,
                 maxLines: 5,
-                cursorColor: C.yellow,
+                cursorColor: C.red,
                 style: hud(17, w: FontWeight.w500, ls: .3),
                 decoration: InputDecoration(
                   hintText: 'TYPE MESSAGE…',
@@ -159,7 +161,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: SafeArea(
           child: Column(children: [
             _top(),
-            Container(height: 1, color: C.yellow.withValues(alpha: .5)),
+            Container(height: 1, color: C.line),
             Expanded(
               child: rev.isEmpty
                   ? Center(child: Text('CHANNEL OPEN // SAY SOMETHING', style: hud(14, color: C.dim, ls: 3)))

@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class C {
-  static const bg = Color(0xFF07090C);
-  static const panel = Color(0xFF0E1217);
-  static const panel2 = Color(0xFF151B22);
-  static const yellow = Color(0xFFFCEE09);
-  static const cyan = Color(0xFF5EF6FF);
-  static const red = Color(0xFFFF003C);
-  static const dim = Color(0xFF6B7885);
-  static const text = Color(0xFFE6F1F5);
-  static const line = Color(0xFF1F2933);
+  static const bg = Color(0xFF090909);
+  static const panel = Color(0xFF101010);
+  static const panel2 = Color(0xFF181818);
+  static const red = Color(0xFFED1C24);
+  static const text = Color(0xFFF2F2F2);
+  static const accent = Color(0xFFD4D4D4);
+  static const dim = Color(0xFF858585);
+  static const line = Color(0xFF303030);
 }
 
 TextStyle hud(double size,
@@ -23,7 +22,23 @@ ThemeData buildTheme() {
   return base.copyWith(
     scaffoldBackgroundColor: C.bg,
     colorScheme: const ColorScheme.dark(
-        primary: C.yellow, secondary: C.cyan, surface: C.panel, error: C.red),
+      primary: C.red,
+      onPrimary: C.bg,
+      secondary: C.accent,
+      onSecondary: C.bg,
+      surface: C.panel,
+      onSurface: C.text,
+      error: C.red,
+      onError: C.bg,
+      outline: C.line,
+    ),
+    dividerColor: C.line,
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: C.red,
+      selectionColor: Color(0x55ED1C24),
+      selectionHandleColor: C.red,
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(color: C.red),
     textTheme: GoogleFonts.rajdhaniTextTheme(base.textTheme)
         .apply(bodyColor: C.text, displayColor: C.text),
   );

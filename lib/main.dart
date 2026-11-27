@@ -63,9 +63,9 @@ class _GateState extends State<Gate> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('RELAY', style: hud(54, color: C.yellow, w: FontWeight.w700, ls: 6)),
+                Text('RELAY', style: hud(54, color: C.text, w: FontWeight.w700, ls: 6)),
                 const SizedBox(height: 6),
-                Text('// SMS CLIENT v0.1', style: hud(16, color: C.cyan, ls: 3)),
+                Text('// SMS CLIENT v0.1', style: hud(16, color: C.red, ls: 3)),
                 const SizedBox(height: 28),
                 Text(
                     'need sms, contacts + notification access to jack in. '

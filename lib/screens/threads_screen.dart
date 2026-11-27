@@ -82,13 +82,13 @@ class _ThreadsScreenState extends State<ThreadsScreen> with WidgetsBindingObserv
         backgroundColor: Colors.transparent,
         child: CyberPanel(
           fill: C.panel,
-          border: C.yellow,
+          border: C.line,
           cut: 14,
           tl: true,
           br: true,
           padding: const EdgeInsets.all(18),
           child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('NEW TRANSMISSION', style: hud(18, color: C.yellow, ls: 2)),
+            Text('NEW TRANSMISSION', style: hud(18, color: C.text, ls: 2)),
             const SizedBox(height: 12),
             TextField(
               controller: c,
@@ -98,8 +98,8 @@ class _ThreadsScreenState extends State<ThreadsScreen> with WidgetsBindingObserv
               decoration: InputDecoration(
                 hintText: '+49 …',
                 hintStyle: hud(20, color: C.dim),
-                enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: C.cyan)),
-                focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: C.yellow)),
+                enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: C.dim)),
+                focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: C.red)),
               ),
             ),
             const SizedBox(height: 16),
@@ -116,7 +116,7 @@ class _ThreadsScreenState extends State<ThreadsScreen> with WidgetsBindingObserv
   Widget _header() => Padding(
         padding: const EdgeInsets.fromLTRB(18, 14, 18, 10),
         child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Text('MESSAGES', style: hud(34, color: C.yellow, w: FontWeight.w700, ls: 4)),
+          Text('MESSAGES', style: hud(34, color: C.text, w: FontWeight.w700, ls: 4)),
           const Spacer(),
           HudTag('${threads.length} THREADS'),
         ]),
@@ -154,7 +154,7 @@ class _ThreadsScreenState extends State<ThreadsScreen> with WidgetsBindingObserv
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
         child: CyberPanel(
           fill: C.panel,
-          border: unread ? C.yellow.withValues(alpha: .7) : C.line,
+          border: unread ? C.red.withValues(alpha: .7) : C.line,
           glow: unread,
           cut: 10,
           tr: true,
@@ -171,7 +171,10 @@ class _ThreadsScreenState extends State<ThreadsScreen> with WidgetsBindingObserv
                       child: Text(t.title.toUpperCase(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: hud(17, color: unread ? C.yellow : C.text, ls: 1.5))),
+                          style: hud(17,
+                              color: C.text,
+                              w: unread ? FontWeight.w700 : FontWeight.w600,
+                              ls: 1.5))),
                   Text(fmtThreadTime(t.date), style: hud(13, color: C.dim)),
                 ]),
                 const SizedBox(height: 3),
@@ -185,8 +188,8 @@ class _ThreadsScreenState extends State<ThreadsScreen> with WidgetsBindingObserv
                     Container(
                       margin: const EdgeInsets.only(left: 8),
                       padding: const EdgeInsets.symmetric(horizontal: 6),
-                      color: C.yellow,
-                      child: Text('${t.unread}', style: hud(13, color: Colors.black, w: FontWeight.w700)),
+                      color: C.red,
+                      child: Text('${t.unread}', style: hud(13, color: C.bg, w: FontWeight.w700)),
                     ),
                 ]),
               ]),
@@ -200,9 +203,9 @@ class _ThreadsScreenState extends State<ThreadsScreen> with WidgetsBindingObserv
   @override
   Widget build(BuildContext context) => Scaffold(
         floatingActionButton: GestureDetector(
-            onTap: _new, child: CyberPanel(fill: C.yellow, cut: 12, tl: true, br: true,
+            onTap: _new, child: CyberPanel(fill: C.red, cut: 12, tl: true, br: true,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-              child: Text('+ NEW', style: hud(17, color: Colors.black, w: FontWeight.w700, ls: 2)))),
+              child: Text('+ NEW', style: hud(17, color: C.bg, w: FontWeight.w700, ls: 2)))),
         body: CyberBackground(
           child: SafeArea(
             child: Column(children: [
@@ -210,9 +213,9 @@ class _ThreadsScreenState extends State<ThreadsScreen> with WidgetsBindingObserv
               if (!isDef) _banner(),
               Expanded(
                 child: loading
-                    ? const Center(child: CircularProgressIndicator(color: C.yellow))
+                    ? const Center(child: CircularProgressIndicator(color: C.red))
                     : RefreshIndicator(
-                        color: C.yellow,
+                        color: C.red,
                         backgroundColor: C.panel,
                         onRefresh: _load,
                         child: threads.isEmpty
